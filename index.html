@@ -146,6 +146,15 @@
             document.title = time;
             setTimeout(updateClock, 1000);
         }
+
+        function toggleSettings() {
+            var x = document.getElementById("settings");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
     </script>
 </head>
 
@@ -153,13 +162,15 @@
     <!--[if lt IE 7]>
                 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
             <![endif]-->
-    <div class="row mb-5">
+    <div class="row">
         <div id="background" style="font-size: 33vw; color: darkred; font-family: monospace; user-select: none;">
             <p id="time" class="text-justify">HELLO</p>
         </div>
     </div>
 
-    <div class="form-group">
+    <button type="button" class="btn btn-outline-secondary" onclick="toggleSettings()">Toggle Settings</button>
+
+    <div class="form-group" id="settings">
         <label for="colorScheme">Color scheme</label>
         <select id="colorScheme" class="form-control">
             <option>Preset</option>
