@@ -13,8 +13,9 @@
     <title>BigClock</title>
     <meta name="description" content="Simple clock">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="bootstrap.min.css">
 
     <script type="text/javascript">
         colonVisible = false;
@@ -87,19 +88,40 @@
 
         window.onclick = function changeStyle() {
             var next = currentStyle % styles.length;
-            if (document.getElementById("preset").checked) {
-                document.getElementById('time').style["color"] = styles[next];
-                currentStyle++;
-                console.log("preset");
-            } else if (document.getElementById("random").checked) {
-                document.getElementById('time').style["color"] = randomColor();
-                console.log("random");
-            } else if (document.getElementById("rainbow").checked) {
-                document.getElementById('time').style["color"] = rainbowColor(16, getRandomInt(1,16));
-                console.log("rainbow");
-            } else if (document.getElementById("pastel").checked) {
-                document.getElementById('time').style["color"] = pastelColor();
-                console.log("pastel");
+            // if (document.getElementById("preset").checked) {
+            //     document.getElementById('time').style["color"] = styles[next];
+            //     currentStyle++;
+            //     console.log("preset");
+            // } else if (document.getElementById("random").checked) {
+            //     document.getElementById('time').style["color"] = randomColor();
+            //     console.log("random");
+            // } else if (document.getElementById("rainbow").checked) {
+            //     document.getElementById('time').style["color"] = rainbowColor(16, getRandomInt(1, 16));
+            //     console.log("rainbow");
+            // } else if (document.getElementById("pastel").checked) {
+            //     document.getElementById('time').style["color"] = pastelColor();
+            //     console.log("pastel");
+            // }
+
+            var colorSchemeSelector = document.getElementById("colorScheme");
+            switch (colorSchemeSelector.selectedIndex) {
+                case 0:
+                    document.getElementById('time').style["color"] = styles[next];
+                    currentStyle++;
+                    console.log("preset");
+                    break;
+                case 1:
+                    document.getElementById('time').style["color"] = randomColor();
+                    console.log("random");
+                    break;
+                case 2:
+                    document.getElementById('time').style["color"] = rainbowColor(16, getRandomInt(1, 16));
+                    console.log("rainbow");
+                    break;
+                case 3:
+                    document.getElementById('time').style["color"] = pastelColor();
+                    console.log("pastel");
+                    break;
             }
         }
 
@@ -131,28 +153,39 @@
     <!--[if lt IE 7]>
                 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
             <![endif]-->
-    <div class="row">
+    <div class="row mb-5">
         <div id="background" style="font-size: 33vw; color: darkred; font-family: monospace; user-select: none;">
             <p id="time" class="text-justify">HELLO</p>
         </div>
     </div>
 
+    <div class="form-group">
+        <label for="colorScheme">Color scheme</label>
+        <select id="colorScheme" class="form-control">
+            <option>Preset</option>
+            <option>Random</option>
+            <option>Rainbow</option>
+            <option>Pastel</option>
+        </select>
+    </div>
+    <!-- 
     <div class="fixed-bottom">
         <form class="mx-auto p-3">
-            <div class="radio form-check-inline">
+            <div class="radio form-check form-check-inline">
                 <label><input type="radio" name="generator" id="preset" style="color: white" checked>preset (10)</label>
             </div>
-            <div class="radio form-check-inline">
+            <div class="radio form-check form-check-inline">
                 <label><input type="radio" name="generator" id="random" style="color: white">random</label>
             </div>
-            <div class="radio form-check-inline">
+            <div class="radio form-check form-check-inline">
                 <label><input type="radio" name="generator" id="rainbow" style="color: white">rainbow (16)</label>
             </div>
-            <div class="radio form-check-inline ">
+            <div class="radio form-check form-check-inline ">
                 <label><input type="radio" name="generator" id="pastel" style="color: white">pastel</label>
             </div>
         </form>
-    </div>
+    </div> -->
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
