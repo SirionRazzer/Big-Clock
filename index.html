@@ -29,7 +29,7 @@
         }
 
         function randomColor() {
-            return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+            return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
         }
 
         function pastelColor() {
@@ -87,11 +87,19 @@
 
         window.onclick = function changeStyle() {
             var next = currentStyle % styles.length;
-            if (!document.getElementById("useRandom").checked) {
+            if (document.getElementById("preset").checked) {
                 document.getElementById('time').style["color"] = styles[next];
                 currentStyle++;
-            } else {
+                console.log("preset");
+            } else if (document.getElementById("random").checked) {
                 document.getElementById('time').style["color"] = randomColor();
+                console.log("random");
+            } else if (document.getElementById("rainbow").checked) {
+                document.getElementById('time').style["color"] = rainbowColor(16, getRandomInt(1,16));
+                console.log("rainbow");
+            } else if (document.getElementById("pastel").checked) {
+                document.getElementById('time').style["color"] = pastelColor();
+                console.log("pastel");
             }
         }
 
@@ -130,10 +138,18 @@
     </div>
 
     <div class="fixed-bottom">
-        <form class="float-right mx-3">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="useRandom">
-                <label class="form-check-label" for="useRandom" style="color: white;">Random</label>
+        <form class="mx-auto p-3">
+            <div class="radio form-check-inline">
+                <label><input type="radio" name="generator" id="preset" style="color: white" checked>preset (10)</label>
+            </div>
+            <div class="radio form-check-inline">
+                <label><input type="radio" name="generator" id="random" style="color: white">random</label>
+            </div>
+            <div class="radio form-check-inline">
+                <label><input type="radio" name="generator" id="rainbow" style="color: white">rainbow (16)</label>
+            </div>
+            <div class="radio form-check-inline ">
+                <label><input type="radio" name="generator" id="pastel" style="color: white">pastel</label>
             </div>
         </form>
     </div>
