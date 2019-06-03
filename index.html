@@ -162,22 +162,24 @@
     <!--[if lt IE 7]>
                 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
             <![endif]-->
-    <div class="row">
+    <div class="row fixed-top">
         <div id="background" style="font-size: 33vw; color: darkred; font-family: monospace; user-select: none;">
             <p id="time" class="text-justify">HELLO</p>
         </div>
     </div>
 
-    <button type="button" class="btn btn-outline-secondary" onclick="toggleSettings()">Toggle Settings</button>
+    <div class="tools fixed-bottom">
+        <button type="button" class="btn btn-outline-secondary m-3" onclick="toggleSettings()">Toggle Settings</button>
 
-    <div class="form-group" id="settings">
-        <label for="colorScheme">Color scheme</label>
-        <select id="colorScheme" class="form-control">
-            <option>Preset</option>
-            <option>Random</option>
-            <option>Rainbow</option>
-            <option>Pastel</option>
-        </select>
+        <div class="form-group p-3" id="settings">
+            <label for="colorScheme">Color scheme</label>
+            <select id="colorScheme" class="form-control">
+                <option>Preset</option>
+                <option>Random</option>
+                <option>Rainbow</option>
+                <option>Pastel</option>
+            </select>
+        </div>
     </div>
     <!-- 
     <div class="fixed-bottom">
