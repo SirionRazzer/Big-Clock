@@ -18,24 +18,83 @@
 
     <script type="text/javascript">
         colonVisible = false;
-
         styles = ["darkred", "gray", "purple", "lime", "navy", "#1c1c1c", "fuchsia", "white", "yellow", "orange"];
         currentStyle = 0;
 
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) +
+                min; //The maximum is exclusive and the minimum is inclusive
+        }
+
+        function rainbow(numOfSteps, step) {
+            // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
+            // Adam Cole, 2011-Sept-14
+            // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
+            var r, g, b;
+            var h = step / numOfSteps;
+            var i = ~~(h * 6);
+            var f = h * 6 - i;
+            var q = 1 - f;
+            switch (i % 6) {
+                case 0:
+                    r = 1;
+                    g = f;
+                    b = 0;
+                    break;
+                case 1:
+                    r = q;
+                    g = 1;
+                    b = 0;
+                    break;
+                case 2:
+                    r = 0;
+                    g = 1;
+                    b = f;
+                    break;
+                case 3:
+                    r = 0;
+                    g = q;
+                    b = 1;
+                    break;
+                case 4:
+                    r = f;
+                    g = 0;
+                    b = 1;
+                    break;
+                case 5:
+                    r = 1;
+                    g = 0;
+                    b = q;
+                    break;
+            }
+            var c = "#" + ("00" + (~~(r * 255)).toString(16)).slice(-2) + ("00" + (~~(g * 255)).toString(16)).slice(
+                -2) + ("00" + (~~(b * 255)).toString(16)).slice(-2);
+            return (c);
+        }
 
         window.onclick = function changeStyle() {
             var next = currentStyle % styles.length;
-            document.getElementById('time').style["color"] = styles[next];
-            currentStyle++;
+            if (!document.getElementById("useRandom").checked) {
+                document.getElementById('time').style["color"] = styles[next];
+                currentStyle++;
+            } else {
+                document.getElementById('time').style["color"] = rainbow(250, getRandomInt(1, 250));
+            }
         }
 
         window.onload = function updateClock() {
 
             var now = new Date(),
-                time = now.getHours().toString();
+                time = "";
+
+            if (now.getHours() < 10) {
+                time = time.concat("0");
+            }
+            time = now.getHours().toString();
 
             time = time.concat(":");
-
 
             if (now.getMinutes() < 10) {
                 time = time.concat("0");
@@ -57,6 +116,15 @@
         <div id="background" style="font-size: 33vw; color: darkred; font-family: monospace; user-select: none;">
             <p id="time" class="text-justify">HELLO</p>
         </div>
+    </div>
+
+    <div class="fixed-bottom">
+        <form class="float-right mx-3">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="useRandom">
+                <label class="form-check-label" for="useRandom" style="color: white;">Random</label>
+            </div>
+        </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
