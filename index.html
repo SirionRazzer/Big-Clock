@@ -133,7 +133,7 @@
             if (now.getHours() < 10) {
                 time = time.concat("0");
             }
-            time = now.getHours().toString();
+            time = time.concat(now.getHours());
 
             time = time.concat(":");
 
